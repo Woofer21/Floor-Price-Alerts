@@ -66,6 +66,11 @@ def main():
             print(f"[INFO] {TIME_PERIOD} mins over")
             print(f"[INFO] precent + change: %{math.fabs(total_change)}")
             print("------------")
+        else:
+            print(f"[INFO] {TIME_PERIOD} mins over")
+            print(f"[INFO] No Change")
+            print("------------")
+
         original = ["", ""]
         new = ["", ""]
         total_change = 0
