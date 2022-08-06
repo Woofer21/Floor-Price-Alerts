@@ -3,14 +3,14 @@ import requests
 import datetime
 import time
 
-slug = input("Enter Slug: ")
-
-url = f"https://api.opensea.io/api/v1/collection/{slug}/stats"
-
-headers = {"Accept": "application/json"}
-
 
 def main():
+    slug = input("Enter Slug: ")
+
+    url = f"https://api.opensea.io/api/v1/collection/{slug}/stats"
+
+    headers = {"Accept": "application/json"}
+
     original = ["", ""]
     new = ["", ""]
     total_change = 0
@@ -39,6 +39,10 @@ def main():
 
             total_change += decreese
             new_time = time.time()
+            if decreese != 0.0:
+                original[0] = response["stats"]["floor_price"]
+                original[1] = f"{datetime.datetime.now().replace(microsecond=0)}"
+
 
             print(f"[ORIGINAL] {original}")
             print(f"[NEW] {new}")
@@ -55,4 +59,5 @@ def main():
         new = ["", ""]
         total_change = 0
 
-main()
+if __name__ == "__main__":
+    main()
