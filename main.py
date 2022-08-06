@@ -60,11 +60,11 @@ def main():
         
         if total_change > 0 and total_change > PRECENT_DECREASE:
             print(f"[INFO] {TIME_PERIOD} mins over")
-            print(f"[INFO] precent - change: %{math.abs(total_change)}")
+            print(f"[INFO] precent - change: %{math.fabs(total_change)}")
             print("------------")
-        elif total_change < 0 and math.abs(total_change) > PRECENT_INCREASE:
+        elif total_change < 0 and math.fabs(total_change) > PRECENT_INCREASE:
             print(f"[INFO] {TIME_PERIOD} mins over")
-            print(f"[INFO] precent + change: %{math.abs(total_change)}")
+            print(f"[INFO] precent + change: %{math.fabs(total_change)}")
             print("------------")
         original = ["", ""]
         new = ["", ""]
