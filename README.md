@@ -14,6 +14,7 @@ WEBHOOK_INCREASE=<LINK TO WEBHOOK>
 
 Next, open `settings.json` and configure the settings to how you would like.
 - `settings.slug` is the ending part of the open sea link, that would be the part after the `...collection/`
+- `settings.curency` is the curency you want to convert the ETH floor price into, it only accepts symobl, for example `USD`. It does suport most regular currencies and most popular crypto currencies
 - `settings.time.refresh.seconds` is the ammount of time inbetween requests to get info from the open sea API, it is in seconds
 - `settings.time.period.minutes` is the ammount of time the program will run before it posts the webhook, it is in minutes
 - `settings.trigger.precent.increase` is the precent the floor price needs to increase before it will trigger the increase webhook

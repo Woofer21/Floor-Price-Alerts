@@ -1,5 +1,6 @@
 {
     "settings.slug": "",
+    "settings.currency": "",
     "settings.time.refresh.seconds": 30,
     "settings.time.period.minutes": 10, 
     "settings.trigger.precent.increase": 5,

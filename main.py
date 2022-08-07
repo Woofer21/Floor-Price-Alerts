@@ -12,9 +12,16 @@ def main():
     
     settings = json.loads(unparsed)
 
+    with open("currencies.json") as file:
+        unparsedC = file.read()
+    
+    currencies = json.loads(unparsedC)
+
     load_dotenv()
 
     SLUG = settings["settings.slug"]
+    CURRENCY_SYMBOL = settings["settings.currency"]
+    CURRENCY_FULL = currencies[settings["settings.currency"]]
     TIME_REFRESH = settings["settings.time.refresh.seconds"]
     TIME_PERIOD = settings["settings.time.period.minutes"]
     PRECENT_INCREASE = settings["settings.trigger.precent.increase"]
@@ -84,7 +91,7 @@ def main():
         if total_change > 0 and total_change > PRECENT_DECREASE:
             print(f"[INFO] {TIME_PERIOD} mins over")
             print(f"[INFO] precent - change: %{math.fabs(total_change)}")
-            rate = get_rate("ETH")
+            rate = get_rate("ETH", CURRENCY_SYMBOL)
             old_usd = old_fp * float(rate)
             new_usd = new_fp * float(rate)
 
@@ -105,7 +112,7 @@ def main():
                                 "inline": True
                             }, 
                             {
-                                "name": "USD Price",
+                                "name": f"{CURRENCY_FULL} Price",
                                 "value": f"Old Floor Price: {round(old_usd, 2)}\nNew Floor Price: {round(new_usd, 2)}",
                                 "inline": True
                             }
@@ -121,7 +128,7 @@ def main():
         elif total_change < 0 and math.fabs(total_change) > PRECENT_INCREASE:
             print(f"[INFO] {TIME_PERIOD} mins over")
             print(f"[INFO] precent + change: %{math.fabs(total_change)}")
-            rate = get_rate("ETH")
+            rate = get_rate("ETH", CURRENCY_SYMBOL)
             old_usd = old_fp * float(rate)
             new_usd = new_fp * float(rate)
 
@@ -142,7 +149,7 @@ def main():
                                 "inline": True
                             }, 
                             {
-                                "name": "USD Price",
+                                "name": f"{CURRENCY_FULL} Price",
                                 "value": f"Old Floor Price: {round(old_usd, 2)}\nNew Floor Price: {round(new_usd, 2)}",
                                 "inline": True
                             }
@@ -158,7 +165,7 @@ def main():
         else:
             print(f"[INFO] {TIME_PERIOD} mins over")
             print(f"[INFO] No Change")
-            rate = get_rate("ETH")
+            rate = get_rate("ETH", CURRENCY_SYMBOL)
             old_usd = old_fp * float(rate)
             new_usd = new_fp * float(rate)
             data = {
@@ -178,7 +185,7 @@ def main():
                                 "inline": True
                             }, 
                             {
-                                "name": "USD Price",
+                                "name": f"{CURRENCY_FULL} Price",
                                 "value": f"Old Floor Price: {round(old_usd, 2)}\nNew Floor Price: {round(new_usd, 2)}",
                                 "inline": True
                             }
@@ -196,7 +203,7 @@ def main():
         new = ["", ""]
         total_change = 0
 
-def get_rate(curency):
+def get_rate(curency, new):
     uri = f"https://api.coinbase.com/v2/exchange-rates?currency={curency}"
 
     response = requests.get(uri)
@@ -206,7 +213,7 @@ def get_rate(curency):
         print(err)
     
     rates = json.loads(response.text)
-    usd_rate = rates["data"]["rates"]["USD"]
+    usd_rate = rates["data"]["rates"][new]
     return usd_rate
 
 def send_webhook(url, data):
