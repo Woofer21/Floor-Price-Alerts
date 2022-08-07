@@ -1,6 +1,6 @@
 # Floor Price Alerts
 
-This is a simple program made in python to send a message every time the floor price goes over x% in y ammount of time, or drops x% in y ammount of time.
+This is a simple program made in python to send a message every time the floor price goes over x% in y amount of time, or drops x% in y amount of time.
 
 ## How to use
 The first thing you will want to do is create a `.env` file in the directory you will be running the file in
