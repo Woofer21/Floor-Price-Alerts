@@ -1,5 +1,5 @@
 {
-    "settings.slug": "premint-collector",
+    "settings.slug": "",
     "settings.time.refresh.seconds": 30,
     "settings.time.period.minutes": 10, 
     "settings.trigger.precent.increase": 5,
