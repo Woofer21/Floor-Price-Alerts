@@ -82,8 +82,8 @@ def main():
             print(f"[INFO] {TIME_PERIOD} mins over")
             print(f"[INFO] precent - change: %{math.fabs(total_change)}")
             rate = get_rate("ETH")
-            old_usd = old_fp * rate
-            new_usd = new_fp * rate
+            old_usd = old_fp * float(rate)
+            new_usd = new_fp * float(rate)
 
             data = {
                 "username": WEBHOOK_DECREASE_NAME,
@@ -119,8 +119,8 @@ def main():
             print(f"[INFO] {TIME_PERIOD} mins over")
             print(f"[INFO] precent + change: %{math.fabs(total_change)}")
             rate = get_rate("ETH")
-            old_usd = old_fp * rate
-            new_usd = new_fp * rate
+            old_usd = old_fp * float(rate)
+            new_usd = new_fp * float(rate)
 
             data = {
                 "username": WEBHOOK_INCREASE_NAME,
@@ -156,8 +156,8 @@ def main():
             print(f"[INFO] {TIME_PERIOD} mins over")
             print(f"[INFO] No Change")
             rate = get_rate("ETH")
-            old_usd = old_fp * rate
-            new_usd = new_fp * rate
+            old_usd = old_fp * float(rate)
+            new_usd = new_fp * float(rate)
             data = {
                 "username": WEBHOOK_NEAUTRAL_NAME,
                 "avatar_url": WEBHOOK_NEAUTRAL_AVATAR,
