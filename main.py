@@ -24,10 +24,13 @@ def main():
     WEBHOOK_DECREASE_URL = os.getenv("WEBHOOK_DECREASE")
     WEBHOOK_NEAUTRAL_NAME = settings["settings.webhooks.neutral.name"]
     WEBHOOK_NEAUTRAL_AVATAR = settings["settings.webhooks.neutral.profile.picture"]
+    WEBHOOK_NEAUTRAL_CONTENT = settings["settings.webhooks.neutral.message.content"]
     WEBHOOK_INCREASE_NAME = settings["settings.webhooks.increase.name"]
     WEBHOOK_INCREASE_AVATAR = settings["settings.webhooks.increase.profile.picture"]
+    WEBHOOK_INCREASE_CONTENT = settings["settings.webhooks.increase.message.content"]
     WEBHOOK_DECREASE_NAME = settings["settings.webhooks.decrease.name"]
     WEBHOOK_DECREASE_AVATAR = settings["settings.webhooks.decrease.profile.picture"]
+    WEBHOOK_DECREASE_CONTENT = settings["settings.webhooks.decrease.message.content"]
 
     url = f"https://api.opensea.io/api/v1/collection/{SLUG}/stats"
 
@@ -78,11 +81,16 @@ def main():
             data = {
                 "username": WEBHOOK_DECREASE_NAME,
                 "avatar_url": WEBHOOK_DECREASE_AVATAR,
+                "content": WEBHOOK_DECREASE_CONTENT,
                 "embeds": [
                     {
                         "title": "Floor Price Dropped",
-                        "description": f"The floor price has dropped over {round(math.fabs(total_change), 2)}% in the past {TIME_PERIOD} minutes",
-                        "color": 0xF94534
+                        "description": f"The floor price has dropped over {PRECENT_DECREASE}% in the past {TIME_PERIOD} minute(s)\n\nDecreasing {round(math.fabs(total_change), 2)}%",
+                        "color": 0xF94534,
+                        "url": f"https://opensea.io/collection/{SLUG}",
+                        "footer": {
+                            "text": f"Collection: {SLUG}"
+                        }
                     }
                 ]
             }
@@ -101,11 +109,16 @@ def main():
             data = {
                 "username": WEBHOOK_INCREASE_NAME,
                 "avatar_url": WEBHOOK_INCREASE_AVATAR,
+                "content": WEBHOOK_INCREASE_CONTENT,
                 "embeds": [
                     {
                         "title": "Floor Price Increased",
-                        "description": f"The floor price has increased over {round(math.fabs(total_change), 2)}% in the past {TIME_PERIOD} minutes",
-                        "color": 0x34F950
+                        "description": f"The floor price has increased over {PRECENT_INCREASE}% in the past {TIME_PERIOD} minute(s)\n\nIncreasing {round(math.fabs(total_change), 2)}%",
+                        "color": 0x34F950,
+                        "url": f"https://opensea.io/collection/{SLUG}",
+                        "footer": {
+                            "text": f"Collection: {SLUG}"
+                        }
                     }
                 ]
             }
@@ -124,11 +137,16 @@ def main():
             data = {
                 "username": WEBHOOK_NEAUTRAL_NAME,
                 "avatar_url": WEBHOOK_NEAUTRAL_AVATAR,
+                "content": WEBHOOK_NEAUTRAL_CONTENT,
                 "embeds": [
                     {
                         "title": "Floor Price Stable",
-                        "description": f"The floor price has not made enough movememnt in the past {TIME_PERIOD} minutes.\n\nThe floor price moved {round(math.fabs(total_change), 2)}%",
-                        "color": 0x969696
+                        "description": f"The floor price has not made enough movement in the past {TIME_PERIOD} minutes.\n\nThe floor price moved {round(math.fabs(total_change), 2)}%",
+                        "color": 0x969696,
+                        "url": f"https://opensea.io/collection/{SLUG}",
+                        "footer": {
+                            "text": f"Collection: {SLUG}"
+                        }
                     }
                 ]
             }

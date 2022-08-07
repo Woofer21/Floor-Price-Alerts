@@ -1,13 +1,16 @@
 {
     "settings.slug": "premint-collector",
     "settings.time.refresh.seconds": 30,
-    "settings.time.period.minutes": 10, 
+    "settings.time.period.minutes": 1, 
     "settings.trigger.precent.increase": 0.01,
     "settings.trigger.precent.decrease": 0.01,
     "settings.webhooks.neutral.name": "Floor Price Alerts",
+    "settings.webhooks.neutral.message.content": "<@&415663644991553536> just sad",
     "settings.webhooks.neutral.profile.picture": "",
     "settings.webhooks.increase.name": "Floor Price Alerts",
+    "settings.webhooks.increase.message.content": "<@&415663644991553536> Fp go BRRRR",
     "settings.webhooks.increase.profile.picture": "",
     "settings.webhooks.decrease.name": "Floor Price Alerts",
+    "settings.webhooks.decrease.message.content": "<@&415663644991553536> Fp Dropped",
     "settings.webhooks.decrease.profile.picture": ""
 }
