@@ -8,12 +8,12 @@ import os
 from dotenv import load_dotenv
 
 def main():
-    with open("local/settings.json") as file:
+    with open("settings.json") as file:
         unparsed = file.read()
     
     settings = json.loads(unparsed)
 
-    with open("local/currencies.json") as file:
+    with open("currencies.json") as file:
         unparsedC = file.read()
     
     currencies = json.loads(unparsedC)
