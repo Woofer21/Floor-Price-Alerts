@@ -3,6 +3,8 @@ import requests
 import datetime
 import time
 import math
+import os
+from dotenv import load_dotenv
 
 def main():
     with open("settings.json") as file:
@@ -10,11 +12,22 @@ def main():
     
     settings = json.loads(unparsed)
 
+    load_dotenv()
+
     SLUG = settings["settings.slug"]
     TIME_REFRESH = settings["settings.time.refresh.seconds"]
     TIME_PERIOD = settings["settings.time.period.minutes"]
     PRECENT_INCREASE = settings["settings.trigger.precent.increase"]
     PRECENT_DECREASE = settings["settings.trigger.precent.decrease"]
+    WEBHOOK_NEAUTRAL_URL = os.getenv("WEBHOOK_NEATURAL")
+    WEBHOOK_INCREASE_URL = os.getenv("WEBHOOK_INCREASE")
+    WEBHOOK_DECREASE_URL = os.getenv("WEBHOOK_DECREASE")
+    WEBHOOK_NEAUTRAL_NAME = settings["settings.webhooks.neutral.name"]
+    WEBHOOK_NEAUTRAL_AVATAR = settings["settings.webhooks.neutral.profile.picture"]
+    WEBHOOK_INCREASE_NAME = settings["settings.webhooks.increase.name"]
+    WEBHOOK_INCREASE_AVATAR = settings["settings.webhooks.increase.profile.picture"]
+    WEBHOOK_DECREASE_NAME = settings["settings.webhooks.decrease.name"]
+    WEBHOOK_DECREASE_AVATAR = settings["settings.webhooks.decrease.profile.picture"]
 
     url = f"https://api.opensea.io/api/v1/collection/{SLUG}/stats"
 
@@ -61,16 +74,72 @@ def main():
         if total_change > 0 and total_change > PRECENT_DECREASE:
             print(f"[INFO] {TIME_PERIOD} mins over")
             print(f"[INFO] precent - change: %{math.fabs(total_change)}")
+
+            data = {
+                "username": WEBHOOK_DECREASE_NAME,
+                "avatar_url": WEBHOOK_DECREASE_AVATAR,
+                "embeds": [
+                    {
+                        "title": "Floor Price Dropped",
+                        "description": f"The floor price has dropped over {round(math.fabs(total_change), 2)}% in the past {TIME_PERIOD} minutes",
+                        "color": 0xF94534
+                    }
+                ]
+            }
+            res = requests.post(WEBHOOK_DECREASE_URL, json=data)
+            try:
+                res.raise_for_status()
+            except requests.exceptions.HTTPError as err:
+                print(err)
+            else:
+                print(f"[WEB HOOK] Successfully sent, Code {res.status_code}")
             print("------------")
         elif total_change < 0 and math.fabs(total_change) > PRECENT_INCREASE:
             print(f"[INFO] {TIME_PERIOD} mins over")
             print(f"[INFO] precent + change: %{math.fabs(total_change)}")
+
+            data = {
+                "username": WEBHOOK_INCREASE_NAME,
+                "avatar_url": WEBHOOK_INCREASE_AVATAR,
+                "embeds": [
+                    {
+                        "title": "Floor Price Increased",
+                        "description": f"The floor price has increased over {round(math.fabs(total_change), 2)}% in the past {TIME_PERIOD} minutes",
+                        "color": 0x34F950
+                    }
+                ]
+            }
+            res = requests.post(WEBHOOK_INCREASE_URL, json=data)
+            try:
+                res.raise_for_status()
+            except requests.exceptions.HTTPError as err:
+                print(err)
+            else:
+                print(f"[WEB HOOK] Successfully sent, Code {res.status_code}")
             print("------------")
         else:
             print(f"[INFO] {TIME_PERIOD} mins over")
             print(f"[INFO] No Change")
-            print("------------")
 
+            data = {
+                "username": WEBHOOK_NEAUTRAL_NAME,
+                "avatar_url": WEBHOOK_NEAUTRAL_AVATAR,
+                "embeds": [
+                    {
+                        "title": "Floor Price Stable",
+                        "description": f"The floor price has not made enough movememnt in the past {TIME_PERIOD} minutes.\n\nThe floor price moved {round(math.fabs(total_change), 2)}%",
+                        "color": 0x969696
+                    }
+                ]
+            }
+            res = requests.post(WEBHOOK_NEAUTRAL_URL, json=data)
+            try:
+                res.raise_for_status()
+            except requests.exceptions.HTTPError as err:
+                print(err)
+            else:
+                print(f"[WEB HOOK] Successfully sent, Code {res.status_code}")
+            print("------------")
         original = ["", ""]
         new = ["", ""]
         total_change = 0

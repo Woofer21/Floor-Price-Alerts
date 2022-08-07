@@ -2,6 +2,12 @@
     "settings.slug": "premint-collector",
     "settings.time.refresh.seconds": 30,
     "settings.time.period.minutes": 10, 
-    "settings.trigger.precent.increase": 5,
-    "settings.trigger.precent.decrease": 5
+    "settings.trigger.precent.increase": 0.01,
+    "settings.trigger.precent.decrease": 0.01,
+    "settings.webhooks.neutral.name": "Floor Price Alerts",
+    "settings.webhooks.neutral.profile.picture": "",
+    "settings.webhooks.increase.name": "Floor Price Alerts",
+    "settings.webhooks.increase.profile.picture": "",
+    "settings.webhooks.decrease.name": "Floor Price Alerts",
+    "settings.webhooks.decrease.profile.picture": ""
 }
