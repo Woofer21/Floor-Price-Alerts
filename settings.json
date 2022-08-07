@@ -5,6 +5,8 @@
     "settings.time.period.minutes": 10, 
     "settings.trigger.precent.increase": 5,
     "settings.trigger.precent.decrease": 5,
+    "settings.trigger.price.alert.in.currecy": 0.00,
+    "settings.trigger.price.alert.timeout.in.minutes": 5,
     "settings.webhooks.neutral.enabled": true,
     "settings.webhooks.neutral.name": "Floor Price Alerts",
     "settings.webhooks.neutral.message.content": "",
@@ -16,5 +18,8 @@
     "settings.webhooks.decrease.enabled": true,
     "settings.webhooks.decrease.name": "Floor Price Alerts",
     "settings.webhooks.decrease.message.content": "",
-    "settings.webhooks.decrease.profile.picture": ""
+    "settings.webhooks.decrease.profile.picture": "",
+    "settings.webhooks.price.alert.name": "Floor Price Alerts",
+    "settings.webhooks.price.alert.message.content": "",
+    "settings.webhooks.price.alert.profile.picture": ""
 }
