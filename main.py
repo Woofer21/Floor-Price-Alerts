@@ -98,12 +98,12 @@ def main():
                         "fields": [
                             {
                                 "name": "ETH Price",
-                                "value": f"Old Floor Price: {old_fp}\nNew Floor Price: {new_fp}",
+                                "value": f"Old Floor Price: {round(old_fp, 2)}\nNew Floor Price: {round(new_fp, 2)}",
                                 "inline": True
                             }, 
                             {
                                 "name": "USD Price",
-                                "value": f"Old Floor Price: {old_usd}\nNew Floor Price: {new_usd}",
+                                "value": f"Old Floor Price: {round(old_usd, 2)}\nNew Floor Price: {round(new_usd, 2)}",
                                 "inline": True
                             }
                         ],
@@ -135,12 +135,12 @@ def main():
                         "fields": [
                             {
                                 "name": "ETH Price",
-                                "value": f"Old Floor Price: {old_fp}\nNew Floor Price: {new_fp}",
+                                "value": f"Old Floor Price: {round(old_fp, 2)}\nNew Floor Price: {round(new_fp, 2)}",
                                 "inline": True
                             }, 
                             {
                                 "name": "USD Price",
-                                "value": f"Old Floor Price: {old_usd}\nNew Floor Price: {new_usd}",
+                                "value": f"Old Floor Price: {round(old_usd, 2)}\nNew Floor Price: {round(new_usd, 2)}",
                                 "inline": True
                             }
                         ],
@@ -171,12 +171,12 @@ def main():
                         "fields": [
                             {
                                 "name": "ETH Price",
-                                "value": f"Old Floor Price: {old_fp}\nNew Floor Price: {new_fp}",
+                                "value": f"Old Floor Price: {round(old_fp, 2)}\nNew Floor Price: {round(new_fp, 2)}",
                                 "inline": True
                             }, 
                             {
                                 "name": "USD Price",
-                                "value": f"Old Floor Price: {old_usd}\nNew Floor Price: {new_usd}",
+                                "value": f"Old Floor Price: {round(old_usd, 2)}\nNew Floor Price: {round(new_usd, 2)}",
                                 "inline": True
                             }
                         ],
