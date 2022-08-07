@@ -22,12 +22,15 @@ def main():
     WEBHOOK_NEAUTRAL_URL = os.getenv("WEBHOOK_NEATURAL")
     WEBHOOK_INCREASE_URL = os.getenv("WEBHOOK_INCREASE")
     WEBHOOK_DECREASE_URL = os.getenv("WEBHOOK_DECREASE")
+    WEBHOOK_NEAUTRAL_ENABLED = settings["settings.webhooks.neutral.enabled"]
     WEBHOOK_NEAUTRAL_NAME = settings["settings.webhooks.neutral.name"]
     WEBHOOK_NEAUTRAL_AVATAR = settings["settings.webhooks.neutral.profile.picture"]
     WEBHOOK_NEAUTRAL_CONTENT = settings["settings.webhooks.neutral.message.content"]
+    WEBHOOK_INCREASE_ENABLED = settings["settings.webhooks.increase.enabled"]
     WEBHOOK_INCREASE_NAME = settings["settings.webhooks.increase.name"]
     WEBHOOK_INCREASE_AVATAR = settings["settings.webhooks.increase.profile.picture"]
     WEBHOOK_INCREASE_CONTENT = settings["settings.webhooks.increase.message.content"]
+    WEBHOOK_DECREASE_ENABLED = settings["settings.webhooks.decrease.enabled"]
     WEBHOOK_DECREASE_NAME = settings["settings.webhooks.decrease.name"]
     WEBHOOK_DECREASE_AVATAR = settings["settings.webhooks.decrease.profile.picture"]
     WEBHOOK_DECREASE_CONTENT = settings["settings.webhooks.decrease.message.content"]
@@ -114,7 +117,7 @@ def main():
                 ]
             }
 
-            send_webhook(WEBHOOK_DECREASE_URL, data)
+            if WEBHOOK_DECREASE_ENABLED: send_webhook(WEBHOOK_DECREASE_URL, data)
         elif total_change < 0 and math.fabs(total_change) > PRECENT_INCREASE:
             print(f"[INFO] {TIME_PERIOD} mins over")
             print(f"[INFO] precent + change: %{math.fabs(total_change)}")
@@ -151,7 +154,7 @@ def main():
                 ]
             }
             
-            send_webhook(WEBHOOK_INCREASE_URL, data)
+            if WEBHOOK_INCREASE_ENABLED: send_webhook(WEBHOOK_INCREASE_URL, data)
         else:
             print(f"[INFO] {TIME_PERIOD} mins over")
             print(f"[INFO] No Change")
@@ -187,7 +190,7 @@ def main():
                 ]
             }
 
-            send_webhook(WEBHOOK_NEAUTRAL_URL, data)
+            if WEBHOOK_NEAUTRAL_ENABLED: send_webhook(WEBHOOK_NEAUTRAL_URL, data)
 
         original = ["", ""]
         new = ["", ""]
