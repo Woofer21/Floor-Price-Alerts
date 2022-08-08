@@ -1,5 +1,4 @@
 import json
-from locale import currency
 import requests
 import datetime
 import time
